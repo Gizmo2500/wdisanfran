@@ -1,0 +1,87 @@
+
+body{
+  background: url(http://i.imgur.com/y7RWtZy.gif);
+  background-size: cover;
+  position: absolute;
+}
+
+
+
+#board {
+  width: 31em;
+  height: 30em;
+  position: relative;
+  top: 10px;
+  left: 50%;
+  margin-left: 50px;
+  
+}
+
+.box {
+  width: 10em;
+  height: 10em;
+  
+  display: inline-block;
+  margin-bottom: 4px;
+  overflow: none;
+}
+
+input{
+ width: 140px;
+ height: 140px;
+ background-color: white;
+ margin-top: 0em;
+ margin-left: 3em;
+ border-radius: 10%;
+ margin: 0px;
+ padding: 0px;
+ position: absolute;
+ border: 0px;
+display: inline;
+font-size: 90px;
+font-weight: bold;
+color: white;
+border: 1px solid black;
+box-shadow: 3px 3px 5px 6px #666699;
+background-color: rgba(0,0,0,.25);
+
+}
+#reset{
+  width: 18em;
+ height: 6em;
+ background-color:;
+ margin-top: 5em;
+ margin-left: 45em;
+ border-radius: 5px;
+ font-family: cursive;
+ color: white;
+ background-color: #990033;
+ position:relative;
+
+}
+#start{
+  width: 18em;
+  height: 6em;
+  border-radius: 5px;
+  margin-left: 50px;
+  font-family: cursive;
+  color: white;
+  background-color: #990033;
+  position: relative;
+  
+
+}
+h1 {
+text-align: center;
+font-family: cursive;
+color: white;
+font-size: 50px;
+margin: 0px, 0px, 0px, 0px;
+}
+
+
+#ryu img{
+  width: 350px;
+  height: 400px;
+  margin-top: -400px;
+}
