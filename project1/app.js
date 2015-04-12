@@ -32,7 +32,7 @@
 
 	//sign up route
 	app.get('/signup', function(req, res){
-		res.send('sign up page');
+		res.render('signup');
 	});
 
 	//profile route
