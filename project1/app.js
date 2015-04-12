@@ -37,7 +37,7 @@
 
 	//profile route
 	app.get('/profile', function(req,res){
-		res.send('profile page');
+		res.render('profile');
 	});
 
 	app.listen(3000, function(){
