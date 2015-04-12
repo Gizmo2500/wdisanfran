@@ -27,7 +27,7 @@
 
 	//login route
 	app.get('/login', function(req, res){
-		res.send("login Page");
+		res.render('login');
 	});
 
 	//sign up route
