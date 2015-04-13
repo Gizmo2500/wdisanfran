@@ -9,20 +9,29 @@
 	//view engine for the app
 	app.set('view engine', 'ejs');
 
+	app.use(session({
+	secret: "I'm very very secret thing",
+	resave: false,
+	save: {
+		uninitialize: true
+	}
+}));
+
+
 	//access to body-parser npm module 
 	app.use(bodyParser.urlencoded({extended: true}));
 
 app.use("/", function(req,res,next) {
 	req.login = function(user) {
 		req.session.userId = user.id;
-	};
+	},
 	req.currentUser = function() {
 		return db.User.find(req.session.userId)
 		         .then(function(dbUser) {
 		         	req.user = dbUser;
 		         	return dbUser;
 		         });
-	};
+	},
 	req.logout = function() {
 		req.session.userId = null;
 		req.user = null;
@@ -42,24 +51,25 @@ app.use("/", function(req,res,next) {
 
 
 	//login route
-	app.get('/login', function(req, res){
-		res.render('login');
+	app.get('/login', function(req,res){
+		req.currentUser().then(function(user){
+			if (user) {
+				res.redirect('/profile');
+			} else {
+				res.render("login");
+			}
+		});
 	});
 
-	app.post('/login', function(req,res){
-	var email = req.body.email;
-	var password = req.body.password;
-	db.User.authenticate(email,password)
-	  .then(function(dbUser){
-	  	if(dbUser) {
-	  		req.login(dbUser);
-	  		res.redirect('/profile');
-	  	} else {
-	  		res.redirect('/login');
-	  	}
-	  }); 
-});
+	app.post("/login", function(req, res){
+	var user= req.body.user;
 
+		db.User.authenticate(user.email, user.password)
+			.then(function(user){
+				req.login(user);
+				res.redirect('/profile');
+			});
+});
 	//sign up route
 	app.get('/signup', function(req, res){
 		res.render('signup');
@@ -68,7 +78,11 @@ app.use("/", function(req,res,next) {
 	app.post('/signup', function(req,res){
 	var email = req.body.email;
 	var password = req.body.password;
-	db.User.createSecure(email,password)
+	var firstName = req.body.first;
+	var lastName = req.body.last;
+	var phone = req.body.phone;
+	var userN = req.body.usrname;
+	db.User.createSecure(email,password,firstName,lastName,phone,userN)
 	  .then(function(user){
 	  	res.redirect('login');
 	  });
@@ -76,9 +90,9 @@ app.use("/", function(req,res,next) {
 
 
 	//profile route
-	app.get('/profile', function(req,res){
-		res.render('profile');
-	});
+	// app.get('/profile', function(req,res){
+	// 	res.render('profile', user: );
+	// });
 
 	db.sequelize.sync().then(function() {
 	app.listen(3000, function() {

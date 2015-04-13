@@ -15,7 +15,7 @@ module.exports = function(sequelize, DataTypes) {
        len: [6, 30],
      }
    },
-   passwoordDigest: {
+   passwordDigest: {
      type:DataTypes.STRING,
      validate: {
        notEmpty: true
