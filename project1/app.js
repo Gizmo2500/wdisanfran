@@ -17,7 +17,7 @@
 
 	//root route for the app
 	app.get('/', function(req, res){
-		res.render("index", {title: "My title"});
+		res.render("index", {title: "InstaSave"});
 	});
 	// route to render search page
 	app.get('/search', function(req,res){
