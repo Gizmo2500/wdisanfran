@@ -71,7 +71,7 @@ module.exports = function(sequelize, DataTypes) {
        });
      },
      associate: function(models) {
-      // this.hasMany(models.FavoriteMovie);
+      this.hasMany(models.Favimage);
        // associations can be defined here
      }
 
