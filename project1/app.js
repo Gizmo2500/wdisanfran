@@ -47,24 +47,24 @@ app.use("/", function(req,res,next) {
 	app.get('/', function(req, res){
 		res.render("index", {title: "InstaSave"});
 	});
-	// route to render search page
+	// route to render search and search query
 	app.get('/search', function(req,res){
 		var q = req.query.q;
-
-		if (q) {
+		if (!q) {
+		res.render("search", {results: [], noResults: true});
+		}else{
 			var url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q;
 
 			request(url, function(error, response, body) {
 				if (!error && response.statusCode === 200) {
 					var results = JSON.parse(body).responseData.results;
+					console.log(results);
 					res.render('search', { results: results });
 				} else {
 					res.send('Something went wrong with the API');
 				}
 			});
-		} else {
-			res.render('search');
-		}
+		} 
 	});
 
 
@@ -79,7 +79,7 @@ app.use("/", function(req,res,next) {
 		});
 	});
 
-	app.post("/login", function(req, res){d
+	app.post("/login", function(req, res){
 	var user= req.body.user;
 
 		db.User.authenticate(user.email, user.password)
