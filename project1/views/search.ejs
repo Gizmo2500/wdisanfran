@@ -9,10 +9,18 @@
 			<a href="/login">Login</a>
 			<a href="/signup">Sign Up</a>
 			<a href="/profile">Profile</a>
-		</div>
+	</div>
+	<div>
+		
+	</div>	
 	<form method="GET" action="/search">
-		<input type="text" name="q3" placeholder="Search">
+		<input type="text" name="q" placeholder="Search">
 		<button>Click me now!</button>
 	</form>
+
+	<% results.forEach(function(result) { %>
+		<img src="<%= result.url %>" width="200">
+	<% }) %>
+
 </body>
 </html>

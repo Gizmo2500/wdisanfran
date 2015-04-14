@@ -49,7 +49,22 @@ app.use("/", function(req,res,next) {
 	});
 	// route to render search page
 	app.get('/search', function(req,res){
-		res.render('search');
+		var q = req.query.q;
+
+		if (q) {
+			var url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q;
+
+			request(url, function(error, response, body) {
+				if (!error && response.statusCode === 200) {
+					var results = JSON.parse(body).responseData.results;
+					res.render('search', { results: results });
+				} else {
+					res.send('Something went wrong with the API');
+				}
+			});
+		} else {
+			res.render('search');
+		}
 	});
 
 
@@ -64,7 +79,7 @@ app.use("/", function(req,res,next) {
 		});
 	});
 
-	app.post("/login", function(req, res){
+	app.post("/login", function(req, res){d
 	var user= req.body.user;
 
 		db.User.authenticate(user.email, user.password)
@@ -101,7 +116,7 @@ app.use("/", function(req,res,next) {
 	//profile route
 	 app.get('/profile', function(req,res){
 	 	req.currentUser().then(function(dbUser){
-	 		res.render('profile', {email: dbUser.userName});
+	 		res.render('profile', {username: dbUser.userName, email: dbUser.email, first: dbUser.firstName, last: dbUser.lastName});
 	 	});
 	 	
 	 });
