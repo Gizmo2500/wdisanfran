@@ -3,6 +3,7 @@
 		session = require('express-session'),
 		request = require('request'),
 		pg = require('pg'),
+		methodOverride = require('method-override');
 		db = require('./models');
 
 	var app = express();
@@ -20,6 +21,8 @@
 
 	//access to body-parser npm module 
 	app.use(bodyParser.urlencoded({extended: true}));
+
+	app.use(methodOverride("_method"));
 
 app.use("/", function(req,res,next) {
 	req.login = function(user) {
@@ -70,6 +73,12 @@ app.use("/", function(req,res,next) {
 				res.redirect('/profile');
 			});
 });
+
+	app.delete('/logout', function(req,res){
+		req.logout();
+		res.redirect('/login');
+});
+
 	//sign up route
 	app.get('/signup', function(req, res){
 		res.render('signup');
