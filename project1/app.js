@@ -90,9 +90,12 @@ app.use("/", function(req,res,next) {
 
 
 	//profile route
-	// app.get('/profile', function(req,res){
-	// 	res.render('profile', user: );
-	// });
+	 app.get('/profile', function(req,res){
+	 	req.currentUser().then(function(dbUser){
+	 		res.render('profile', {email: dbUser.userName});
+	 	});
+	 	
+	 });
 
 	db.sequelize.sync().then(function() {
 	app.listen(3000, function() {
