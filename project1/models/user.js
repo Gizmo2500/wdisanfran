@@ -29,7 +29,7 @@ module.exports = function(sequelize, DataTypes) {
      },
      addToFavs: function(db,imgurl) {
        return db.Favimage
-         .create({imgurl: imgurl, userid: this.id});
+         .create({imgurl: imgurl, UserId: this.id});
      }
    },
    classMethods: {

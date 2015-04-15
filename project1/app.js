@@ -50,10 +50,12 @@ app.use("/", function(req,res,next) {
 	// route to render search and search query
 	app.get('/search', function(req,res){
 		var q = req.query.q;
+
+		var start = req.query.start || 0;
 		if (!q) {
 		res.render("search", {results: [], noResults: true});
 		}else{
-			var url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q;
+			var url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q + '&start=' + start;
 
 			request(url, function(error, response, body) {
 				if (!error && response.statusCode === 200) {
@@ -113,16 +115,46 @@ app.use("/", function(req,res,next) {
 });
 
 
-	//profile route
+
+
+
+
+
+	//profile route currently working on this
 	 app.get('/profile', function(req,res){
-	 	req.currentUser().then(function(dbUser){
-	 		res.render('profile', {username: dbUser.userName, email: dbUser.email, first: dbUser.firstName, last: dbUser.lastName});
-	 	});
+	 		if (req.session.userId){
+	 			db.User.find(req.session.userId)
+	 			.then(function(dbUser) {
+	 				dbUser.getFavimages()
+	 				.then(function(dbImages) {
+	 					res.render('profile', { user: dbUser, images: dbImages });
+	 				})
+	 			})
+	 		} else {
+	 			res.redirect('/login');
+	 		}
 	 	
 	 });
 
+ //defined a variable imgurl to favorites route to reference the favorites button on the 
+ app.post('/favorites', function(req,res){
+ 	var imgurl = req.body.imgurl;
+ 	req.currentUser().then(function(dbUser){
+		if (dbUser) {
+ 			dbUser.addToFavs(db,imgurl).then(function(){
+ 				res.redirect('/profile');
+ 			});
+ 		} else {
+			res.redirect('/login');
+		}
+ 	}); 
+ });
+
+
+
+
 	db.sequelize.sync().then(function() {
-	app.listen(3000, function() {
+	app.listen(process.env.PORT || 3000, function() {
 		console.log('Server listening on port 3000');
 	});
 });

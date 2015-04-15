@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Search</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
 	<div>
@@ -19,8 +20,14 @@
 	</form>
 
 	<% results.forEach(function(result) { %>
+	
 		<img src="<%= result.url %>" width="200">
+		<form method="POST" action="/favorites">
+			<input type="hidden" name="imgurl" value="<%=result.url%>">
+			<button>Favorite</button>
+		</form>		
+	
 	<% }) %>
-
+	
 </body>
 </html>

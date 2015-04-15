@@ -1,8 +1,7 @@
 "use strict";
 module.exports = function(sequelize, DataTypes) {
   var Favimage = sequelize.define("Favimage", {
-    imgurl: DataTypes.STRING,
-    userid: DataTypes.INTEGER
+    imgurl: DataTypes.STRING
   }, {
     classMethods: {
       associate: function(models) {

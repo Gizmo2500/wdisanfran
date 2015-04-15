@@ -3,6 +3,7 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
+	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
 </head>
 <body>
 	<div>
@@ -13,9 +14,13 @@
 			<button>Logout</button>
 		</form>
 		</div>
+	<% images.forEach(function(image) { %>
+		<img src="<%=image.imgurl%>" width="200">
+	<% }) %>
+
 	<h1>Profile page</h1>
-	<h2>Hi,<%= username %></h2>
-	<h2><%= email %></h2>
-	<h2><%= first %> <%= last %></h2>
+	<h2>Hi,<%= user.userName %></h2>
+	<h2><%= user.email %></h2>
+	<h2><%= user.firstName %> <%= user.lastName %></h2>
 </body>
 </html>
