@@ -27,10 +27,10 @@ module.exports = function(sequelize, DataTypes) {
      checkPassword: function(password) {
        return bcrypt.compareSync(password, this.passwordDigest);
      },
-     /*addToFavs: function(db,imdbID,rating) {
-       return 
-         .create({imdbID: imdbID, rating: rating, UserId: this.id});
-     }*/
+     addToFavs: function(db,imgurl) {
+       return db.Favimage
+         .create({imgurl: imgurl, userid: this.id});
+     }
    },
    classMethods: {
      encryptPassword: function(password) {
