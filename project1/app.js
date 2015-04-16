@@ -49,7 +49,7 @@ app.use("/", function(req,res,next) {
 	});
 	// route to render search and search query
 	app.get('/search', function(req,res){
-		var q = req.query.q;
+		var q = req.query.q ;
 
 		var start = req.query.start || 0;
 		if (!q) {
@@ -57,17 +57,48 @@ app.use("/", function(req,res,next) {
 		}else{
 			var url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q + '&start=' + start;
 
+			// var nexturl =  'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q + '&start=' + (start + 4);
+			
 			request(url, function(error, response, body) {
 				if (!error && response.statusCode === 200) {
 					var results = JSON.parse(body).responseData.results;
 					console.log(results);
-					res.render('search', { results: results });
+					res.render('search', { results: results});
 				} else {
 					res.send('Something went wrong with the API');
 				}
 			});
+
+			// request(nexturl, function(error, response, body){
+			// 	if(!error && response.statusCode === 200) {
+			// 		var nextResults = JSON.parse(body).responseData.results;
+			// 		console.log(nextResults);
+			// 		res.render('search', { nextResults: results, nexturl: nexturl });
+			// 	} else {
+			// 		res.send('Something went wrong with the API');
+			// 	}
+			// });
 		} 
 	});
+
+	// app.get('/nextSearch', function(req, res){
+
+	// 	var q = req.query.q;
+
+	// 	var start = req.query.start || 0;
+
+	// 	var nexturl =  'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q + '&start=' + (start + 4);
+
+	// 	request(nexturl, function(error, response, body){
+	// 			if(!error && response.statusCode === 200) {
+	// 				var nextResults = JSON.parse(body).responseData.results;
+	// 				console.log(nextResults);
+	// 				res.render('search', { nextResults: nextResults, nexturl: nexturl });
+	// 			} else {
+	// 				res.send('Something went wrong with the API');
+	// 			}
+	// 		});
+	// });
 
 
 	//login route
@@ -120,7 +151,9 @@ app.use("/", function(req,res,next) {
 
 
 
-	//profile route currently working on this
+	//profile route find user information and displays information
+
+
 	 app.get('/profile', function(req,res){
 	 		if (req.session.userId){
 	 			db.User.find(req.session.userId)
