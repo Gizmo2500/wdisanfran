@@ -3,14 +3,64 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Search</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+	body {
+		background: url(https://s-media-cache-ak0.pinimg.com/736x/6e/59/44/6e5944a8f65dcc0acff8abd15a196e94.jpg);
+		background-size: cover;
+	}
+	  .cust-btn {
+        width: 300px;
+        border-radius: 0;
+        background-color: rgba(121, 142, 255, 0.3);
+        color: white;
+      }
+      .cust-btn:hover {
+        width: 300px;
+        border-radius: 0;
+        background-color: rgba(121, 151, 232, 0.6);
+        color:; 
+        border: solid 1px blue;
+      }
+
+      .cust-btn:active, .cust-btn:focus {
+        width: 300px;
+        border-radius: 0;
+        background-color: rgba(121, 151, 232, 0.6);
+        color: black; 
+        border: solid 1px blue;
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+      }
+	.cust-navbar {
+        background-color: rgba(121, 142, 255, 0.5); 
+        border: none;
+      }
+      .nbtn{
+      	background-color: rgba(121, 151, 232, 0.8);
+      	color:white;
+      }
+      a:hover{
+      	text-decoration: none;
+      	color: gray;
+      }
+      a{
+      	text-decoration: none;
+      	color: white;
+      }
+</style>
 </head>
 <body>
-	<div>
-			<a href="/login">Login</a>
-			<a href="/signup">Sign Up</a>
-			<a href="/profile">Profile</a>
-	</div>
+	<div class="navbar navbar-default cust-navbar" >
+      
+        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/">Home</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/search">Search</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/login">Login</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/profile">Profile</a></button>
+          
+    </div>
 	<div>
 		
 	</div>	
@@ -20,11 +70,11 @@
 	</form>
 
 	<% results.forEach(function(result) { %>
-	
-		<img src="<%= result.url %>" width="200">
+		
+		<img src="<%= result.url %>" width="300" class="img-rounded img-responsive center-block" alt="Responsive image">
 		<form method="POST" action="/favorites">
 			<input type="hidden" name="imgurl" value="<%=result.url%>">
-			<button>Favorite</button>
+			<button class="btn btn-primary cust-btn center-block" >Favorite</button>
 		</form>		
 	
 	<% }) %>

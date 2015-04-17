@@ -30,6 +30,12 @@ module.exports = function(sequelize, DataTypes) {
      addToFavs: function(db,imgurl) {
        return db.Favimage
          .create({imgurl: imgurl, UserId: this.id});
+     },
+     remFromFavs: function(db,imgurl){
+       return db.Favimage.find({where: {imgurl: imgurl}})
+                .then(function(img){
+                  img.destroy();
+                });
      }
    },
    classMethods: {

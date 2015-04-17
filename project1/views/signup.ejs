@@ -3,53 +3,113 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Sign up page</title>
+	<link rel="stylesheet" type="text/css" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+	body {
+		background: url(https://s-media-cache-ak0.pinimg.com/736x/df/0a/98/df0a98b985edf007ba19a89702cf81bc.jpg);
+		background-size: cover;
 
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	}
+	body .cust-form {
+        background-color: rgba(210, 210, 210, .8);
+        padding: 50px;
+      }
+      
+     .cust-btn {
+        width: 100%;
+        border-radius: 0;
+        background-color: #27AE60;
+        color: white;
+      }
+      .cust-btn:hover {
+        width: 100%;
+        border-radius: 0;
+        background-color: #2ECC71;
+        color:; 
+        border: solid 1px blue;
+      }
+
+      .cust-btn:active, .cust-btn:focus {
+        width: 100%;
+        border-radius: 0;
+        background-color: #27AE60;
+        color: black; 
+        border: solid 1px blue;
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+      }
+      .cust-field {
+        border-radius: 5px;
+        background-color: rgba(0,0,0,.50);
+        color: white;
+      }
+      .cust-navbar {
+        background-color: rgba(0,0,0, .50); 
+        border: none;
+      }
+      .nbtn{
+      	background-color: rgba(83, 182, 44, 0.5);
+      	color:white;
+      }
+      a{
+      	text-decoration: none;
+      	color: white;
+      }
+
+</style>
 </head>
 <body>
-		<div class="container">
-			<div class="row">
-				<div class="col-xs-6 col-xs-3 right">
-					<a href="/login">Login</a>
-					<a href="/search">Search</a>
-					<a href="/signup">Sign Up</a>
+		<div class="navbar navbar-default cust-navbar" >
+      
+        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/">Home</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/search">Search</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/login">Login</a></button>
+          
+    </div>
+
+	<div class="container">
+      <div class="row">
+        <div  class="col-xs-offset-2 col-xs-8 col-md-offset-4 col-md-4">
+
+			<form method="POST" action="/signup">
+				<div class="form-group">
+			
+				<input type="text" name="email" id="email1" placeholder="Email" class="form-control cust-field">
+			
 				</div>
-			</div>
-		</div>
-
-	<form method="POST" action="/signup">
-		<div class="form-group">
-				
-				<input type="text" name="email" id="email1" placeholder="Email">
-				
-		</div>
-		<div class="form-group">
+				<div class="form-group">
 			 	
-				<input type="password" name="password" placeholder="Password">
+				<input type="password" name="password" placeholder="Password" class="form-control cust-field">
 					
-		</div>
-		<div class="form-group">
+				</div>
+				<div class="form-group">
 			
-				<input type="text" name="first" placeholder="First Name">
+				<input type="text" name="first" placeholder="First Name" class="form-control cust-field">
 			
-		</div>
-		<div class="form-group">
+				</div>
+				<div class="form-group">
 			
-				<input type="text" name="last" placeholder="Last Name">
+				<input type="text" name="last" placeholder="Last Name" class="form-control cust-field">
 			
-		</div>
-		<div class="form-group">
+				</div>
+				<div class="form-group">
 			
-				<input type="text" name="phone" placeholder="phone# optional">
+				<input type="text" name="phone" placeholder="phone# optional" class="form-control cust-field">
 			
-		</div>
-		<div class="form-group">
+				</div>
+				<div class="form-group">
 			
-			<input type="text" name="usrname" placeholder="create a user name">
+				<input type="text" name="usrname" placeholder="create a user name" class="form-control cust-field">
 			
-		</div>		
-		<button>Sign up</button>
+				</div>
+				<div class="form-group">		
+				<button class="btn btn-primary cust-btn">Sign up</button>
+				</div>
 	</form>
-
+		</div>
+	   </div>
+	</div>
 </body>
 </html>

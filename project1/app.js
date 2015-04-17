@@ -183,7 +183,30 @@ app.use("/", function(req,res,next) {
  	}); 
  });
 
+app.delete('/unfavorite', function(req,res){
+	var imgurl =req.body.imgurl;
+		if (req.session.userId){
+	 			db.User.find(req.session.userId)
+	 			.then(function(dbUser) {
+	 				dbUser.getFavimages()
+	 				.then(function() {
+	 					// dbUser.remFromFavs(db,imgurl).then(function(){
+	 					// 	console.log("faf;lsj");
+	 					// 	res.redirect('/profile');
+	 					// });
+	 				console.log("\n\n\nn\n\n\nIMAGEURL", imgurl)
+	 				db.Favimage.find({where: {imgurl: imgurl}})
+                	  .then(function(img){
+                  		img.destroy();
+                  		res.redirect('/profile');
+                	  });
 
+	 				})
+	 			})
+		} else {
+			res.redirect('/login');
+		}
+	});
 
 
 	db.sequelize.sync().then(function() {

@@ -3,24 +3,101 @@
 <head>
 	<meta charset="UTF-8">
 	<title>Document</title>
-	<link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+	<link rel="stylesheet" type="text/css "href="https://maxcdn.bootstrapcdn.com/bootstrap/3.3.4/css/bootstrap.min.css">
+<style>
+	body{
+		background: url(http://www.nomaddesignlab.com/higuma/background.jpg);
+		background-size:cover;
+
+	}
+	 .cust-btn {
+        width: 300px;
+        border-radius: 0;
+        background-color: rgba(121, 142, 255, 0.3);
+        color: white;
+      }
+      .cust-btn:hover {
+        width: 300px;
+        border-radius: 0;
+        background-color: rgba(121, 151, 232, 0.6);
+        color:; 
+        border: solid 1px blue;
+      }
+
+      .cust-btn:active, .cust-btn:focus {
+        width: 300px;
+        border-radius: 0;
+        background-color: rgba(121, 151, 232, 0.6);
+        color: black; 
+        border: solid 1px blue;
+        background-image: none;
+        outline: 0;
+        -webkit-box-shadow: none;
+                box-shadow: none;
+      }
+	.cust-navbar {
+        background-color: rgba(0, 0, 0, 0.0); 
+        border: none;
+      }
+      .nbtn{
+      	background-color: rgba(121, 151, 232, 0.8);
+      	color:white;
+      }
+      a:hover{
+      	text-decoration: none;
+      	color: gray;
+      }
+      a{
+      	text-decoration: none;
+      	color: white;
+      }
+      .bnav{
+      	margin-left: 50px;
+      	background-color: rgba(121, 151, 232, 0.8);
+      	color: white;
+      }
+      .urlimg{
+      	margin-top: 60px;
+      }
+      .user {
+      	color:white;
+      }
+</style>
 </head>
 <body>
-	<div>
-			<a href="/login">Login</a>
-			<a href="/search">Search</a>
-			<a href="/signup">Sign Up</a>
-		<form method="POST" action="/logout?_method=DELETE">
-			<button>Logout</button>
+	<nav>
+	<div class="navbar navbar-default cust-navbar navbar-fixed-top" >
+      
+        <button type="button" class="btn btn-default navbar-btn nbtn pull-left"><a href="/">Home</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn pull-left"><a href="/search">Search</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn pull-left"><a href="/profile">Profile</a></button>
+        <h2 class="navbar pull-right user">Username: <%= user.userName %></h2>
+		<h2 class="navbar text-center user">Hi,<%= user.firstName %> <%= user.lastName %></h2>	
+    </div>
+</nav>
+<nav class="navbar navbar-default cust-navbar navbar-fixed-bottom" width="95%">
+	<h2 class="navbar pull-left user"><%= user.email %></h2>
+	<form  method="POST" action="/logout?_method=DELETE">
+			<button type"button" class="btn btn-default navbar-btn pull-right bnav">Logout</button>
 		</form>
-		</div>
-	<% images.forEach(function(image) { %>
-		<img src="<%=image.imgurl%>" width="200">
-	<% }) %>
+</nav>
 
-	<h1>Profile page</h1>
-	<h2>Hi,<%= user.userName %></h2>
-	<h2><%= user.email %></h2>
-	<h2><%= user.firstName %> <%= user.lastName %></h2>
+	
+	
+	
+	
+	
+	
+
+	<div>
+		<% images.forEach(function(image) { %>
+			<img src="<%=image.imgurl%>" width="300" class="img-responsive img-rounded center-block urlimg" alt="Responsive image">
+			<form method="POST" action="/unfavorite?_method=DELETE">
+				<input type="hidden" name="imgurl" value="<%= image.imgurl %>">
+				<button class="btn btn-primary cust-btn center-block responsive">Removed</button>
+			</form>
+		<% }) %>
+	</div>
+	
 </body>
 </html>
