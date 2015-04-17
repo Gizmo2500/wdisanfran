@@ -35,7 +35,7 @@
                 box-shadow: none;
       }
 	.cust-navbar {
-        background-color: rgba(121, 142, 255, 0.5); 
+        background-color: rgba(121, 142, 255, 0.0); 
         border: none;
       }
       .nbtn{
@@ -55,19 +55,19 @@
 <body>
 	<div class="navbar navbar-default cust-navbar" >
       
-        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/">Home</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/search">Search</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/login">Login</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn"><a href="/profile">Profile</a></button>
-          
+        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/">Home</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/search">Search</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/login">Login</a></button>
+        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/profile">Profile</a></button>
+        <form class="form-group navbar" method="GET" action="/search">
+          <input type="text" name="q" placeholder="Search">
+          <button type="button" class="btn btn-default navbar-btn nbtn">Search</button>
+        </form>
     </div>
 	<div>
 		
 	</div>	
-	<form method="GET" action="/search">
-		<input type="text" name="q" placeholder="Search">
-		<button>Click me now!</button>
-	</form>
+	
 
 	<% results.forEach(function(result) { %>
 		
@@ -76,7 +76,7 @@
 			<input type="hidden" name="imgurl" value="<%=result.url%>">
 			<button class="btn btn-primary cust-btn center-block" >Favorite</button>
 		</form>		
-	
+	 
 	<% }) %>
 
   <% if(!noResults) {  %>
