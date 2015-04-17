@@ -108,3 +108,32 @@ function bubbleSort(a)
  
 bubbleSort(a);
 console.log(a);
+
+var merge = function(left, right) {
+    var merged = [];
+    var l = 0, r = 0; // These are our left and right array index counters.
+
+    while(l < left.length && r < right.length) {
+        if(left[l] < right[r]) {
+            merged.push(left[l++]);
+        } else {
+            merged.push(right[r++]);
+        }
+    }
+
+    return merged.concat(left.slice(l)).concat(right.slice(r));
+}
+
+
+var mergeSort = function(arr) {
+    if(arr.length < 2) {
+        // Arrays that have 0 or 1 items don't need to be sorted
+        return arr;
+    }
+    // Now we find the middle of the array and split it into two pieces. 
+    var middle  =   Math.floor(arr.length / 2);
+    var left    =   arr.slice(0, middle);
+    var right   =   arr.slice(middle);
+
+    return merge(mergeSort(left), mergeSort(right));
+}
