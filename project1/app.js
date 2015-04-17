@@ -206,11 +206,8 @@ app.delete('/unfavorite', function(req,res){
 		} else {
 			res.redirect('/login');
 		}
-	});
+	});	
+
+	app.listen(process.env.PORT || 3000); 
 
 
-	db.sequelize.sync().then(function() {
-	app.listen(process.env.PORT || 3000, function() {
-		console.log('Server listening on port 3000');
-	});
-});
