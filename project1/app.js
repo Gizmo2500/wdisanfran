@@ -49,13 +49,15 @@ app.use("/", function(req,res,next) {
 	});
 	// route to render search and search query
 	app.get('/search', function(req,res){
-		var q = req.query.q ;
-
+		var q = req.query.q || null ;
 		var start = req.query.start || 0;
+
 		if (!q) {
-		res.render("search", {results: [], noResults: true});
-		}else{
+			res.render("search", {results: [], noResults: true});
+		} else {
 			var url = 'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q + '&start=' + start;
+			var nextFour = '/search?q='+encodeURI(q)+'&start='+(parseInt(start)+4);
+			var prevFour = '/search?q='+encodeURI(q)+'&start='+(parseInt(start)-4 < 0 ? 0 : start-4);
 
 			// var nexturl =  'https://ajax.googleapis.com/ajax/services/search/images?v=1.0&q=' + q + '&start=' + (start + 4);
 			
@@ -63,7 +65,7 @@ app.use("/", function(req,res,next) {
 				if (!error && response.statusCode === 200) {
 					var results = JSON.parse(body).responseData.results;
 					console.log(results);
-					res.render('search', { results: results});
+					res.render('search', { results: results, prevFour: prevFour, nextFour: nextFour, noResults: false});
 				} else {
 					res.send('Something went wrong with the API');
 				}
