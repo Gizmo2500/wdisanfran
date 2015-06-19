@@ -63,15 +63,22 @@
       .user {
       	color:white;
       }
+      .favs{
+        display: inline
+        float: center;
+        
+      }
 </style>
 </head>
 <body>
 	<nav>
 	<div class="navbar navbar-default cust-navbar navbar-fixed-top" >
       
-        <button type="button" class="btn btn-default navbar-btn nbtn pull-left"><a href="/">Home</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn pull-left"><a href="/search">Search</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn pull-left"><a href="/profile">Profile</a></button>
+        <a href="/"><button type="button" class="btn btn-default navbar-btn nbtn pull-left">Home</button></a>
+        <a href="/search"><button type="button" class="btn btn-default navbar-btn nbtn pull-left">Search</button></a>
+        <a href="/profile"><button type="button" class="btn btn-default navbar-btn nbtn pull-left">Profile</button></a>
+        
+
         <h2 class="navbar pull-right user">Username: <%= user.userName %></h2>
 		<h2 class="navbar text-center user">Hi,<%= user.firstName %> <%= user.lastName %></h2>	
     </div>
@@ -90,14 +97,17 @@
 	
 	
 
-	<div>
+	<div class="favs">
 		<% images.forEach(function(image) { %>
-			<img src="<%=image.imgurl%>" width="300" class="img-responsive img-rounded center-block urlimg" alt="Responsive image">
+			
+      <img src="<%=image.imgurl%>" width="300" class="img-responsive img-rounded center-block urlimg" alt="Responsive image">
 			<form method="POST" action="/unfavorite?_method=DELETE">
 				<input type="hidden" name="imgurl" value="<%= image.imgurl %>">
-				<button class="btn btn-primary cust-btn center-block responsive">Remove</button>
+				<button class="btn btn-primary cust-btn center-block responsive">Remove</button><br/>
 			</form>
+
 		<% }) %>
+  
 	</div>
 	
 </body>

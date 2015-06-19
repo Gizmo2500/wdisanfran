@@ -50,15 +50,28 @@
       	text-decoration: none;
       	color: white;
       }
+
+      .search1 {
+        display: inline-block;
+      }
+      .prev{
+        float: left;
+
+      }
+      .next{
+        float: right;
+      }
 </style>
 </head>
 <body>
 	<div class="navbar navbar-default cust-navbar" >
       
-        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/">Home</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/search">Search</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/login">Login</a></button>
-        <button type="button" class="btn btn-default navbar-btn nbtn pull-center"><a href="/profile">Profile</a></button>
+        <a href="/"><button type="button" class="btn btn-default navbar-btn nbtn pull-center">Home</button></a>
+        <a href="/search"><button type="button" class="btn btn-default navbar-btn nbtn pull-center">Search</button></a>
+        <a href="/login"><button type="button" class="btn btn-default navbar-btn nbtn pull-center">Login</button></a>
+        <a href="/profile"><button type="button" class="btn btn-default navbar-btn nbtn pull-center">Profile</button></a>
+        
+
         <form class="form-group navbar" method="GET" action="/search">
           <input type="text" name="q" placeholder="Search">
           <button type="button" class="btn btn-default navbar-btn nbtn">Search</button>
@@ -70,17 +83,17 @@
 	
 
 	<% results.forEach(function(result) { %>
-		
-		<img src="<%= result.url %>" width="300" class="img-rounded img-responsive center-block" alt="Responsive image">
+		<div class="search1">
+		<img src="<%= result.url %>" width="250" class="img-rounded img-responsive center-block" alt="Responsive image">
 		<form method="POST" action="/favorites">
 			<input type="hidden" name="imgurl" value="<%=result.url%>">
 			<button class="btn btn-primary cust-btn center-block" >Favorite</button>
 		</form>		
-	 
+	  </div>
 	<% }) %>
 
   <% if(!noResults) {  %>
-  <a href="<%=prevFour%>">Previous Page</a> | <a href="<%=nextFour%>">Next Page</a>
+  <a href="<%=prevFour%>"><button class="prev">Previous Page</button></a> | <a href="<%=nextFour%>"><button class="next">Next Page</button></a>
 
   <% } %> 
   
